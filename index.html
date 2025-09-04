@@ -31,8 +31,8 @@
     </div>
     <div class="cartTab">
         <h1>Carrito de Compras</h1>
-        <div class="listCart">
-            <div class="item">
+        <div class="listCart"></div>
+            <!-- <div class="item">
                 <div class="image">
                     <img src="image/1.png" alt="" class="image">
                 </div>
@@ -47,8 +47,44 @@
                     <span>1</span>
                     <span class="plus"></span>
                 </div>
+            </div> -->
+
+            <!--Aqui añadimos el total-->
+            <div class="cartTotal">
+                <span>Total:</span>
+                <span class="totalAmount">$0</span>
             </div>
-        </div>
+            <!--Aqui añadimos los datos del cliente-->
+            <div class="cartForm">
+    <label>
+        Nombre:
+        <input type="text" id="clientName" required>
+    </label>
+    <label>
+        Teléfono:
+        <input type="text" id="clientPhone" required>
+    </label>
+    <label>
+        Método de pago:
+        <select id="paymentMethod" required>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Tarjeta">Tarjeta</option>
+        </select>
+    </label>
+    <label>
+        Entrega:
+        <select id="deliveryType" required>
+            <option value="Recoger en tienda">Recoger en tienda</option>
+            <option value="Domicilio">Domicilio</option>
+        </select>
+    </label>
+    <label id="addressField" style="display:none;">
+        Dirección:
+        <input type="text" id="clientAddress">
+    </label>
+</div>
+
         <div class="btn">
             <button class="close">Cerrar</button>
             <button class="checkOut">Realizar Pago</button>
