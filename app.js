@@ -76,23 +76,26 @@ const formatPrice = (value) => {
 const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
+    let totalPrice = 0;
+
     if(cart.length > 0){
         cart.forEach(item => {
-            totalQuantity = totalQuantity +  item.quantity;
+            totalQuantity += item.quantity;
             let newItem = document.createElement('div');
             newItem.classList.add('item');
             newItem.dataset.id = item.product_id;
 
             let positionProduct = products.findIndex((value) => value.id == item.product_id);
             let info = products[positionProduct];
-            listCartHTML.appendChild(newItem);
+
+            // Acumular el precio total
+            totalPrice += info.price * item.quantity;
+
             newItem.innerHTML = `
-            <div class="image">
+                <div class="image">
                     <img src="${info.image}">
                 </div>
-                <div class="name">
-                ${info.name}
-                </div>
+                <div class="name">${info.name}</div>
                 <div class="totalPrice">${formatPrice(info.price * item.quantity)}</div>
                 <div class="quantity">
                     <span class="minus"><</span>
@@ -100,10 +103,19 @@ const addCartToHTML = () => {
                     <span class="plus">></span>
                 </div>
             `;
-        })
+            listCartHTML.appendChild(newItem);
+        });
     }
-    iconCartSpan.innerText = totalQuantity;
-}
+
+    // Actualizar contador de ícono
+    iconCartSpan.innerText = totalQuantity > 0 ? totalQuantity : 0;
+
+    // 🔥 Actualizar el total en el carrito
+    const totalAmount = document.querySelector('.totalAmount');
+    if(totalAmount){
+        totalAmount.textContent = formatPrice(totalPrice);
+    }
+};
 
 listCartHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
@@ -157,6 +169,19 @@ const initApp = () => {
 initApp();
 
 
+// Mostrar u ocultar campo de dirección según tipo de entrega
+const deliveryTypeSelect = document.getElementById('deliveryType');
+const addressField = document.getElementById('addressField');
+
+deliveryTypeSelect.addEventListener('change', () => {
+    if (deliveryTypeSelect.value === 'Domicilio') {
+        addressField.style.display = 'block';
+    } else {
+        addressField.style.display = 'none';
+    }
+});
+
+
 // Seleccionar botón de checkout
 let checkOutButton = document.querySelector('.checkOut');
 
@@ -166,23 +191,47 @@ checkOutButton.addEventListener('click', () => {
         return;
     }
 
-    let message = "¡Hola! Quiero realizar mi pedido:%0A";
-    
+    // Obtener datos del formulario
+    let clientName = document.getElementById('clientName').value.trim();
+    let clientPhone = document.getElementById('clientPhone').value.trim();
+    let paymentMethod = document.getElementById('paymentMethod').value;
+    let deliveryType = document.getElementById('deliveryType').value;
+    let clientAddress = document.getElementById('clientAddress').value.trim();
+
+    if (!clientName || !clientPhone) {
+        alert("Por favor, completa tu nombre y teléfono.");
+        return;
+    }
+    if (deliveryType === "Domicilio" && !clientAddress) {
+        alert("Por favor, ingresa tu dirección.");
+        return;
+    }
+
+    let message = `¡Hola! Quiero realizar mi pedido:%0A`;
+    message += `👤 Nombre: ${clientName}%0A📞 Teléfono: ${clientPhone}%0A💳 Pago: ${paymentMethod}%0A🚚 Entrega: ${deliveryType}%0A`;
+    if (deliveryType === "Domicilio") {
+        message += `📍 Dirección: ${clientAddress}%0A`;
+    }
+    message += `%0A--- Productos --- %0A`;
+
     cart.forEach(item => {
         let product = products.find(p => p.id == item.product_id);
-        message += `• ${product.name} x${item.quantity} - $${product.price * item.quantity}%0A`;
+        message += `• ${product.name} x${item.quantity} - ${formatPrice(product.price * item.quantity)}%0A`;
     });
 
-    // Agregar total de la compra al final (opcional)
     let total = cart.reduce((sum, item) => {
         let product = products.find(p => p.id == item.product_id);
         return sum + (product.price * item.quantity);
     }, 0);
-    message += `%0A*Total: ${formatPrice(total)}`;
 
-    // Número de WhatsApp en formato internacional
+    message += `%0A*Total: ${formatPrice(total)}*`;
+
     let phoneNumber = "573246394689"; 
-    
     let url = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(url, "_blank");
+
+    // Vaciar carrito y almacenamiento
+    cart = [];
+    localStorage.removeItem('cart');
+    addCartToHTML();
 });
