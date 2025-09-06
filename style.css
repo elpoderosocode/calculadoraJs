@@ -1,19 +1,169 @@
+
+
+* {
+  box-sizing: border-box;
+}
+
+
 body{
     margin: 0;
-    font-family: Poppins;
+    font-family: 'Poppins', sans-serif;
 }
+
+/* ----- HEADER ----- */
+.premium-header {
+    background: #c8e1ed;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 70px;   /* ajusta según lo grande que quieras tu logo */
+    width: auto;    /* mantiene proporción */
+    display: block;
+    filter: brightness(2); /* 🔆 Aumenta el brillo (1 = normal, >1 más brillante) */
+}
+
+
+/* .logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.logo span {
+    color: #ff6fc3;
+} */
+
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-links li a:hover {
+    color: #6c63ff;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 30px;
+    padding: 8px 15px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 200px;
+    font-size: 14px;
+}
+
+.search-box button {
+    border: none;
+    background: transparent;
+    color: #777;
+    cursor: pointer;
+}
+
+.user-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.user-actions a {
+    color: #555;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.user-actions a:hover {
+    color: #6c63ff;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
+    .navbar {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #fff;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .navbar.active {
+        left: 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .search-box {
+        display: none;
+    }
+}
+/*FIN DEL HEADER*/
+
+
 .container{
     width: 900px;
-    margin: auto;
+    width: 100%;
+    margin: 0 auto;
     max-width: 90vw;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 5px;
+    box-sizing: border-box;
     transition: transform .5s;
 }
 svg{
     width: 30px;
 }
-header{
+.products-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,24 +189,42 @@ header{
     font-size: xx-large;
 }
 .listProduct .item img{
-    width: 90%;
+    width: 100%;
     filter: drop-shadow(0 50px 20px #0009);
+    height: 220px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
 }
 
 
 .listProduct{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
+    padding: 20px;
 }
 .listProduct .item{
-    background-color: #EEEEE6;
-    padding: 20px;
+    background-color: #c8e1ed;
+    padding: 15px;
     border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    margin-bottom: 20px; /* 🔥 asegura espacio debajo de cada card */
 }
 .listProduct .item h2{
-    font-weight: 500;
-    font-size: large;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .listProduct .item .price{
     letter-spacing: 7px;
@@ -158,7 +326,7 @@ body.showCart .container{
     flex: 1;
     padding: 10px;
     font-size: 15px;
-    background-color: #E8BC0E;
+    background-color: #c8e1ed;
     border: none;
     font-family: Poppins;
     font-weight: 500;
@@ -222,3 +390,91 @@ body.showCart .container{
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+
+
+/*COMIENZO DEL FOOTER */
+
+.footer {
+  background: #111; /* Negro elegante */
+  color: #ddd;
+  width: 100%; /* 🔥 Ocupa todo el ancho */
+  padding: 50px 20px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  max-width: 1300px;
+  margin: auto; /* Centra el contenido dentro del ancho */
+}
+
+.footer-section h4 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #fff;
+  border-bottom: 2px solid #E8BC0E;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.footer-section p, 
+.footer-section a {
+  font-size: 14px;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: #E8BC0E;
+}
+
+.footer-logo {
+  width: 130px;
+  margin-bottom: 15px;
+  filter: brightness(2); /* 🔆 Hace más blanco el logo */
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 6px 0;
+}
+
+.social-icons a {
+  font-size: 20px;
+  margin-right: 12px;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #E8BC0E;
+}
+
+.payment-icons i {
+  font-size: 32px;
+  margin-right: 12px;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.payment-icons i:hover {
+  color: #E8BC0E;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 15px;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  font-size: 13px;
+  color: #888;
+}
+/*Fin del footer*/
