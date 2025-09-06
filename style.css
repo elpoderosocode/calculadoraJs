@@ -1,8 +1,8 @@
 
-
+/* 
 * {
   box-sizing: border-box;
-}
+} */
 
 
 body{
@@ -10,17 +10,25 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* ----- HEADER ----- */
 .premium-header {
     background: #c8e1ed;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    padding: 15px 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-sizing: border-box;
+    padding: 10px 15px; /* menos padding lateral */
+    flex-wrap: wrap;    /* permite que el contenido baje en dos filas si no cabe */
 }
 
 .logo img {
@@ -151,12 +159,12 @@ body{
 
 
 .container{
-    width: 900px;
+    width: 1200px;
     width: 100%;
     margin: 0 auto;
     max-width: 90vw;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
     box-sizing: border-box;
     transition: transform .5s;
 }
@@ -182,8 +190,9 @@ svg{
     align-items: center;
     border-radius: 50%;
     color: #fff;
-    top: 50%;
-    right: -20px;
+    top: 0;
+    transform: translate(50%, -50%);
+    right: -10px;
 }
 .title{
     font-size: xx-large;
@@ -242,7 +251,7 @@ svg{
 
 /* cart */
 .cartTab{
-    width: 400px;
+    width: 100%;
     background-color: #353432;
     color: #eee;
     position: fixed;
@@ -252,6 +261,8 @@ svg{
     display: flex;
     flex-direction: column;
     transition: .5s;
+    max-width: 400px;  /* en pantallas grandes se queda en 400px */
+    right: -100%;      /* fuera de pantalla en móviles */
 }
 
 .cartTotal {  /*ESTILOS PARA EL TOTAL DEL CARRITO*/
@@ -307,7 +318,9 @@ body.showCart .cartTab{
     right: 0;
 }
 body.showCart .container{
-    transform: translateX(-250px);
+    /* transform: translateX(-250px); */
+    transform: translateX(0); /* 🔥 evita empuje horizontal */
+
 }
 .cartTab h1{
     padding: 20px;
@@ -389,6 +402,15 @@ body.showCart .container{
     .listProduct{
         grid-template-columns: repeat(2, 1fr);
     }
+
+     .icon-cart span {
+    right: 0; 
+    transform: translate(50%, -50%);
+  }
+
+     .cartTab {
+    max-width: 100%; /* ocupa todo el ancho en móvil */
+  }
 }
 
 
