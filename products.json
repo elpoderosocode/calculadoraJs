@@ -3,49 +3,57 @@
         "id": 1,
         "name":" Chocolate",
         "price": 14000,
-        "image": "image/1.png"
+        "image": "image/14.png",
+        "category": "tortas"
     },
     {
         "id": 2,
         "name":" Selva Negra",
         "price": 14000,
-        "image": "image/2.png"
+        "image": "image/2.png",
+        "category": "tortas"
     },
     {
         "id": 3,
         "name":" Tres leches Baileys",
         "price": 14000,
-        "image": "image/3.png"
+        "image": "image/3.png",
+        "category": "postres"
     },
     {
         "id": 4,
         "name":" Naranja Semillas de Amapola",
         "price": 12000,
-        "image": "image/4.png"
+        "image": "image/4.png",
+        "category": "tortas"
     },
     {
         "id": 5,
         "name":" Red Velvet",
         "price": 14000,
-        "image": "image/5.png"
+        "image": "image/5.png",
+        "category": "tortas"
     },
     {
         "id": 6,
         "name":" Flan De Caramelo",
         "price": 11000,
-        "image": "image/6.png"
+        "image": "image/6.png",
+        "category": "postres"
     },
     {
         "id": 7,
         "name":" Tres leches Tradicional",
         "price": 11000,
-        "image": "image/7.png"
+        "image": "image/3.png",
+        "category": "postres"
     },
     {
         "id": 8,
         "name":" Choco Brownie con Helado ",
         "price": 12000,
-        "image": "image/8.png"
+        "image": "image/8.png",
+        "category": "postres"
     }
 
 ]
